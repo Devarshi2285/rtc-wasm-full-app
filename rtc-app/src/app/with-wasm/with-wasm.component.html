@@ -1,0 +1,23 @@
+<h1>Mediasoup Basic Demo</h1>
+
+<div style="margin-bottom: 20px;">
+    <span style="margin-right: 20px;">
+        Status: <strong [style.color]="isConnected ? 'green' : 'red'">
+            {{ isConnected ? 'Connected' : 'Disconnected' }}
+        </strong>
+    </span>
+    <button (click)="start()" [disabled]="!isConnected || callStarted">Join Call</button>
+</div>
+
+<div class="video-grid" [hidden]="!callStarted" style="flex-wrap: wrap;">
+    <div>
+        <h3>Local Video</h3>
+        <video id="localVideo" autoplay playsinline muted></video>
+    </div>
+    <div *ngFor="let remote of remoteVideoStreams">
+        <h3>Remote Video ({{ remote.id | slice:0:8 }})</h3>
+        <video [srcObject]="remote.stream" autoplay playsinline></video>
+    </div>
+
+
+</div>
